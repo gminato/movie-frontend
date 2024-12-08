@@ -1,0 +1,31 @@
+/* select {
+    width: 100%;
+    padding: 10px;
+    margin: auto;
+    border-radius: 4px;
+height: 4vh;
+    border: 1px solid #ccc;
+}
+  
+.country-select {
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background: #fff url('../assets/Designer.jpeg') no-repeat center center/cover;
+    height: 40vh ;
+    opacity: 0.8;
+}
+
+.select-option {
+    height: 6vh;
+    padding: 10px;
+    margin-top: 20vh;
+    margin-right: 10px;
+
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    opacity: 1;
+} */
