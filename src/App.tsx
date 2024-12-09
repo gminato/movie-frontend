@@ -5,7 +5,8 @@ import Movies from "./movies/Movies";
 import "./App.css";
 
 const App: React.FC = () => {
-  const [selectedState,setSelectedState] = useState<string | null>(null);
+  const [selectedState, setSelectedState] = useState<string | null>(null);
+  const [selectedCity, setSelectedCity] = useState<string | null>(null);
 
   return (
     <Router>
@@ -15,14 +16,15 @@ const App: React.FC = () => {
           path="/"
           element={
             <Home
-              onStateSelect={(country) =>setSelectedState(country)}
+              onStateSelect={(state) => setSelectedState(state)}
+              onCitySelect={(city) => setSelectedCity(city)}
             />
           }
         />
         {/* Movies route */}
         <Route
           path="/movies"
-          element={<Movies selectedState={selectedState} />}
+          element={<Movies selectedState={selectedState} selectedCity={selectedCity} />}
         />
       </Routes>
     </Router>
@@ -30,19 +32,51 @@ const App: React.FC = () => {
 };
 
 // Home component handles the CountrySelect and navigation
-const Home: React.FC<{ onStateSelect : (country: string) => void }> = ({ onStateSelect}) => {
+const Home: React.FC<{
+  onStateSelect: (state: string) => void;
+  onCitySelect: (city: string) => void;
+}> = ({ onStateSelect, onCitySelect }) => {
   const navigate = useNavigate();
+  const [stateName, setStateName] = useState<string | null>(null);
+  const [cityName, setCityName] = useState<string | null>(null);
 
-  const handleCountrySelect = (stateName: string) => {
-    onStateSelect(stateName);
-    console.log(stateName);
-    navigate("/movies",{state:{selectedState:stateName}}); 
+  const handleCountryStateSelect= (state: string) => {
+    setStateName(state);
+    onStateSelect(state);
+    console.log("State selected:", state);
+
+    // Check if both state and city are selected, then navigate
+    if (cityName) {
+      navigateToMovies(state, cityName);
+    }
+  };
+
+  const handleCountryCitySelect = (city: string) => {
+    setCityName(city);
+    onCitySelect(city);
+    console.log("City selected:", city);
+
+    // Check if both state and city are selected, then navigate
+    if (stateName) {
+      navigateToMovies(stateName, city);
+    }
+  };
+
+  const navigateToMovies = (state: string, city: string) => {
+    navigate("/movies", {
+      state: { selectedState: state, selectedCity: city },
+    });
   };
 
   return (
+
     <div className="home">
-      <CountrySelect onSelect={handleCountrySelect} />
+      <CountrySelect
+        onCountryStateSelect={handleCountryStateSelect}
+        onCountryCitySelect={handleCountryCitySelect}
+      />
     </div>
+
   );
 };
 
