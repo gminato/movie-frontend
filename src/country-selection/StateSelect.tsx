@@ -53,7 +53,7 @@ const CountrySelect: React.FC<CountrySelectProps> = ({ onCountryStateSelect , on
         <CardContent>
           <Select onValueChange={handleCountryStateChange}>
             <SelectTrigger className="w-[300px] m-5">
-              <SelectValue placeholder="Select State" />
+              <SelectValue placeholder="Select state" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>

@@ -2,6 +2,7 @@
   "name": "quick-boot-frontend",
   "private": true,
   "version": "0.0.0",
+  "proxy": "http://localhost:8000",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,6 +12,7 @@
   },
   "dependencies": {
     "@radix-ui/react-select": "^2.1.2",
+    "@radix-ui/react-slot": "^1.1.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.468.0",
