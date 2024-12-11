@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 interface MovieCardProps {
   id: number;
@@ -24,11 +25,16 @@ const MovieCard: React.FC<MovieCardProps> = ({
   posterUrl,
   trailerUrl,
 }) => {
-    const dummyImageUrl = "https://dummyimage.com/450x300/000/fff";
+  const navigate = useNavigate();
+
+  const handleBookTicketClick = () => {
+    navigate(`${title}`);
+  };
+
   return (
     <Card className="w-full max-w-md shadow-md">
       <CardHeader>
-        <img src={dummyImageUrl} alt={title} className="w-full h-48 object-cover rounded-md" />
+        <img src={posterUrl} alt={title} className="w-full h-68 object-cover rounded-md" />
       </CardHeader>
       <CardContent>
         <CardTitle>{title}</CardTitle>
@@ -41,10 +47,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
         </div>
       </CardContent>
       <CardFooter className="flex justify-between mt-4">
-        <Button rel="noopener noreferrer">
-          Watch Trailer
-        </Button>
-        <Button variant="secondary">More Info</Button>
+        <Button onClick={handleBookTicketClick} className="w-full">Book Ticket</Button>
       </CardFooter>
     </Card>
   );

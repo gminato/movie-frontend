@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./state-select.css";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -11,37 +11,32 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-interface CountrySelectProps {
-  onCountryStateSelect: (country: string) => void;
-  onCountryCitySelect: (city: string) => void;
-}
+import { useAppContext } from "@/context/AppContextProps";
+import { useNavigate } from "react-router-dom";
 
-const CountrySelect: React.FC<CountrySelectProps> = ({ onCountryStateSelect , onCountryCitySelect}) => {
-  const [countryStates, setCountriesStates] = useState<
-    { name: string; code: string }[]
-  >([]);
 
-  useEffect(() => {
-    // Simulate API call to fetch countries
-    const fetchCountries = async () => {
-      setCountriesStates([
-        { name: "India", code: "IN" },
-        { name: "United States", code: "US" },
-        { name: "Canada", code: "CA" },
-      ]);
-    };
 
-    fetchCountries();
-  }, []);
+const CountrySelect = () => {
+
+  const { selectedCity,selectedState, setSelectedCity, setSelectedState } = useAppContext();
+  const navigate = useNavigate();
 
   const handleCountryStateChange = (event: string) => {
-    console.log(event);
-    onCountryStateSelect(event);
+    setSelectedState(event);
+    if(selectedCity) {
+      navigateToMoviesPage();
+    }
   };
 
   const handleCityNameChange = (event: string) => {
-    console.log(event);
-    onCountryCitySelect(event);
+    setSelectedCity(event);
+    if(selectedState) {
+      navigateToMoviesPage();
+    }
+  }
+
+  const navigateToMoviesPage = () => {
+    navigate("/movies");
   }
 
   return (

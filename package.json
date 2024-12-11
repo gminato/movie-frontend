@@ -2,7 +2,7 @@
   "name": "quick-boot-frontend",
   "private": true,
   "version": "0.0.0",
-  "proxy": "http://localhost:8000",
+  "proxy": "http://localhost:8080",
   "type": "module",
   "scripts": {
     "dev": "vite",
